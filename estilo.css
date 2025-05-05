@@ -1,23 +1,33 @@
+/* =============================== */
+/* Estilos Gerais */
+/* Aplicados em todo o sistema */
+/* =============================== */
+
 body {
     font-family: Arial, sans-serif;
-    margin: 30px;
     background-color: #ffffff;
     color: #2c3e50;
+    margin: 0;
+    padding-top: 90px; /* Espaço para o cabeçalho fixo */
 }
 
 h1, h2 {
     color: #2c3e50;
+    margin-left: 5%;
 }
 
-form {
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px #ddd;
-    max-width: 600px;
+a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+    
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos gerais para inputs, selects e textareas */
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -26,12 +36,22 @@ textarea,
 select {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 0; /* Margens controladas pelas divs .form-row */
 }
 
+/* Estilo geral para labels */
+label {
+    display: block;
+    margin-bottom: 5px; /* Espaço entre o label e o campo abaixo */
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Estilo geral para botões submit */
 input[type="submit"] {
     background-color: #2c3e50;
     color: white;
@@ -40,29 +60,260 @@ input[type="submit"] {
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
+    margin-right: 10px; /* Espaço padrão à direita de botões submit */
 }
 
 input[type="submit"]:hover {
     background-color: #1a252f;
 }
 
-a {
-    color: #2c3e50;
+
+/* =============================== */
+/* Layout: Cabeçalho Fixo */
+/* Estilos aplicados no topo do layout */
+/* =============================== */
+
+.topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 0; /* Padding vertical */
+    z-index: 1000;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+    border-radius: 0 !important;
+}
+
+.topo-conteudo {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 5%; /* Padding lateral responsivo */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topo-esquerda {
+    display: flex;
+    flex-direction: column;
+}
+
+.topo .titulo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    min-width: 120px;
+}
+
+.usuario span {
+    font-size: 14px;
+    word-break: break-word;
+    text-align: right;
+}
+
+.usuario a.sair {
+    background-color: #e74c3c;
+    padding: 6px 14px;
+    border-radius: 6px;
+    color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+.usuario a.sair:hover {
+    background-color: #c0392b;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
 }
 
-table {
-    border-collapse: collapse;
+/* Responsive para telas menores - Cabeçalho */
+@media (max-width: 600px) {
+    .topo-conteudo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .usuario {
+        align-items: flex-start;
+        margin-top: 15px;
+        min-width: auto;
+    }
+    .usuario span {
+        text-align: left;
+    }
+}
+
+
+/* =============================== */
+/* Layout: Área de Conteúdo Principal */
+/* Estilo do container principal abaixo do cabeçalho */
+/* =============================== */
+
+.conteudo {
     width: 100%;
+    max-width: 100%;
+    margin: 20px auto; /* Espaço superior e centralização */
+    padding: 0 5%; /* Padding lateral responsivo */
+    box-sizing: border-box;
+}
+
+
+/* =============================== */
+/* Estilos de Formulário (Padrão) */
+/* Estilos para formulários em geral (cadastro, edição, etc.) */
+/* =============================== */
+
+/* Estilo geral para blocos de formulário */
+form {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px; /* Padding interno */
+    border-radius: 8px;
+    box-shadow: 0 0 5px #ddd;
+    max-width: 650px; /* Largura máxima */
+    margin: 0 auto 20px auto; /* Centraliza por padrão */
+    margin-left: 5%
+}
+
+/* Estilo para cada linha (div.form-row) dentro de QUALQUER formulário */
+form .form-row {
+    margin-bottom: 15px; /* Espaçamento padrão entre as linhas do formulário */
+}
+
+/* A última linha (botões) tem um espaçamento diferente */
+form .form-buttons-row {
+    margin-top: 20px; /* Espaço antes dos botões */
+    /* text-align: center; */
+}
+
+
+/* =============================== */
+/* Página: Login (login.php) */
+/* Estilos específicos para a tela de login */
+/* =============================== */
+
+body.login {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.login-container form { /* Estilo específico do formulário de login */
+    display: flex;
+    flex-direction: column;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.login-container input[type="submit"] { /* Estilo específico do botão de login */
+    padding: 12px;
+    font-size: 16px;
+    margin-right: 0; /* Remove margem geral do submit */
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #1a252f;
+}
+
+.erro {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
+/* =============================== */
+/* Página: Index (index.php) */
+/* Estilos específicos para a listagem e filtros */
+/* =============================== */
+
+/* Estilo para o formulário de filtro no index */
+form.index-filter-form {
+     /* Sobrescreve o max-width e margin auto da regra 'form' geral para o alinhamento à esquerda */
+     max-width: 650px; /* Max-width específico para o formulário do index */
+     margin: 20px 0; /* Alinha à esquerda e adiciona margin-top/bottom */
+     /* Restante (background, padding, border-radius, box-shadow) vem da regra 'form' geral */
+}
+
+/* Estilo para as linhas com inputs pares (Flexbox) no formulário do index */
+.index-filter-form .linha-horizontal {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Estilo para inputs/selects dentro das linhas Flexbox no formulário do index */
+.index-filter-form .linha-horizontal input,
+.index-filter-form .linha-horizontal select {
+    flex: 1; /* Fazem crescer e dividir o espaço */
+}
+
+/* Estilos da Tabela na Página Index */
+table {
+    width: 100%;
+    border-collapse: collapse;
     background-color: #ffffff;
     box-shadow: 0 0 5px #ddd;
     border-radius: 8px;
-    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 20px; /* Espaço acima da tabela */
 }
 
 th, td {
@@ -75,27 +326,410 @@ th {
     background-color: #f2f2f2;
 }
 
-.topo {
-    background-color: #2c3e50;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Larguras específicas para colunas da tabela */
+th:nth-child(1), td:nth-child(1) { width: 5%; min-width: 50px; } /* ID */
+th:nth-child(2), td:nth-child(2) { width: 10%; min-width: 80px; } /* Imagem */
+th:nth-child(4), td:nth-child(4) { width: 10%; min-width: 100px; } /* Categoria */
+th:nth-child(5), td:nth-child(5) { width: 10%; min-width: 100px; } /* Preço */
+th:nth-child(6), td:nth-child(6) { width: 8%; min-width: 80px; } /* Estoque */
+th:nth-child(7), td:nth-child(7) { width: 10%; min-width: 90px; } /* Status */
+th:nth-child(9), td:nth-child(9) { width: 10%; min-width: 120px; } /* Ações */
+
+
+/* Responsividade da Tabela */
+@media (max-width: 800px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+     td:nth-child(8) { /* Coluna Descrição */
+        white-space: normal; /* Permite quebra de linha na descrição */
+    }
 }
 
-.topo .titulo {
-    font-size: 22px;
+/* Estilos dos status de estoque */
+.status-ok { color: green; font-weight: bold; }
+.status-alerta { color: orange; font-weight: bold; }
+.status-critico { color: red; font-weight: bold; }
+
+
+/* =============================== */
+/* Página: Categorias (categorias.php) */
+/* Estilos específicos */
+/* =============================== */
+
+/* Estilos dos status de categoria */
+.ativo {
+    color: green;
     font-weight: bold;
 }
 
-.topo .usuario {
+.inativo {
+    color: red;
+    font-weight: bold;
+}
+
+
+/* =============================== */
+/* Página: Catálogo (catalogo.php) */
+/* Estilos específicos */
+/* =============================== */
+
+.topo-catalogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 5%; /* Consistente com o padding do .conteudo/topo */
+}
+
+.topo-catalogo h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.btn-voltar {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-left: 5%;
+}
+
+.btn-voltar:hover {
+    background-color: #1a252f;
+}
+
+/* Estilo do formulário de filtros no catálogo */
+form.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 5% 20px 5%; /* Ajustado para usar 5% de margem lateral */
+    max-width: none;
+    box-shadow: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+form.filtros input[type="text"],
+form.filtros select,
+form.filtros button {
+    padding: 8px;
+    flex: 1;
+    margin: 0;
+}
+
+form.filtros button {
+    padding: 10px 20px;
+}
+
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 5%; /* Consistente com o padding do .conteudo */
+}
+
+.produto {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.produto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.produto h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    min-height: 48px;
+}
+
+.produto p {
+    margin: 5px 0;
     font-size: 14px;
 }
 
-.topo a {
-    color: #ecf0f1;
-    margin-left: 10px;
+.produto .preco {
+    font-size: 22px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 10px;
 }
+
+
+/* Estilos dos status de categoria */
+.ativo {
+    color: green;
+    font-weight: bold;
+}
+
+.inativo {
+    color: red;
+    font-weight: bold;
+}
+
+/* =============================== */
+/* Página: Categorias (categorias.php) */
+/* Estilos específicos */
+/* =============================== */
+
+/* Estilos dos status de categoria */
+.ativo {
+    color: green;
+    font-weight: bold;
+}
+
+.inativo {
+    color: red;
+    font-weight: bold;
+}
+
+/* Estilo específico para a tabela de Categorias */
+table.categorias-table { /* Alvo: tags table com a classe categorias-table */
+    width: 100%; /* Permite que ela ocupe até 100% do espaço disponível */
+    max-width: 80%; /* Defina a largura máxima desejada para a tabela de categorias */
+    margin: 20px auto; /* Centraliza a tabela e adiciona margem em cima/baixo */
+    margin-left: 5%
+}
+
+/* Ajuste das larguras das colunas para a tabela de Categorias */
+table.categorias-table th:nth-child(1),
+table.categorias-table td:nth-child(1) {
+    width: 10%; /* Largura para a coluna ID */
+    min-width: 50px;
+}
+
+table.categorias-table th:nth-child(2),
+table.categorias-table td:nth-child(2) {
+    /* Coluna Nome - Deixar flexível para ocupar o espaço restante */
+     width: auto;
+}
+
+table.categorias-table th:nth-child(3),
+table.categorias-table td:nth-child(3) {
+    width: 20%; /* Largura para a coluna Quantidade de Doces */
+    min-width: 80px;
+}
+
+table.categorias-table th:nth-child(4),
+table.categorias-table td:nth-child(4) {
+    width: 15%; /* Largura para a coluna Status */
+    min-width: 80px;
+}
+
+table.categorias-table th:nth-child(5),
+table.categorias-table td:nth-child(5) {
+    width: 25%; /* Largura para a coluna Ações */
+    min-width: 120px; /* Garante espaço para os links */
+}
+
+
+
+/* =============================== */
+/* Página: Catálogo (catalogo.php) */
+/* Estilos específicos */
+/* =============================== */
+
+body.pagina-catalogo {
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif; /* Lista de fontes, da mais desejada para alternativas */
+}
+
+
+.topo-catalogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    /* O padding lateral já vem do container pai .conteudo (padding: 0 5%) */
+    padding: 0; /* Removido padding: 0 5%; daqui para evitar padding duplicado */
+}
+
+.topo-catalogo h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+/* Estilo para um botão geral ou link com aparência de botão */
+.btn-geral { /* Classe usada no link "Voltar para Home" */
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Garante que padding/margin funcionem como esperado */
+}
+
+.btn-geral:hover {
+    background-color: #1a252f;
+}
+
+
+/* Estilo do formulário de filtros no catálogo */
+form.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Margens e Padding ajustados para funcionar dentro do .conteudo */
+    margin: 0 0 20px 0; /* Margem inferior, 0 nas laterais */
+    padding: 0; /* Sem padding interno no form, pois vem do .conteudo e itens flex */
+    max-width: none;
+    box-shadow: none;
+    background-color: transparent;
+    /* Propriedades como background, box-shadow, border-radius da regra 'form' geral são sobrescritas/resetadas aqui */
+}
+
+form.filtros input[type="text"],
+form.filtros select,
+form.filtros button {
+    padding: 8px;
+    flex: 1; /* Faz os itens dividirem o espaço */
+    margin: 0; /* Remove margens padrão */
+}
+
+form.filtros button {
+    padding: 10px 20px; /* Padding do botão */
+    /* Outros estilos (background, color, etc.) vêm da regra input[type="submit"] */
+}
+
+
+.produtos { /* Container dos cards de produto no catálogo */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    /* O padding lateral já vem do container pai .conteudo (padding: 0 5%) */
+    padding: 0; /* Removido padding: 0 5%; daqui para evitar padding duplicado */
+    margin-bottom: 20px; /* Espaço abaixo da grade */
+}
+
+.produto { /* Card de produto individual no catálogo */
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.produto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.produto h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    min-height: 48px;
+}
+
+.produto p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.produto .preco {
+    font-size: 22px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 10px;
+}
+
+body.pagina-catalogo {
+    padding-top: 0px; /* Exemplo: Aumenta um pouco o espaço */
+}
+
+.produto .estoque-catalogo {
+    font-size: 14px; /* Tamanho da fonte */
+    color: #2c3e50; /* Cor do texto */
+    margin-top: 10px; /* Espaço acima */
+    margin-bottom: 0; /* Remover margem inferior padrão */
+    font-weight: bold;
+}
+
+
+/* =============================== */
+/* Mensagens do Sistema */
+/* Estilos para mensagens de erro ou sucesso */
+/* =============================== */
+
+.mensagem-sistema {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    width: 680px;
+    box-sizing: border-box;
+    margin-left: 5%; /* Ajuste este valor se 5% não for o ideal */
+
+}
+
+.mensagem-sistema.erro {
+    color: #e74c3c;
+    background-color: #fdd;
+    border: 1px solid #e74c3c;
+}
+
+.mensagem-sistema.sucesso {
+    color: #27ae60;
+    background-color: #dfd;
+    border: 1px solid #27ae60;
+}
+
+body.pagina-editar-categoria .conteudo {
+    /* Remove o padding da regra .conteudo geral para esta página */
+    padding-left: 0%; /* Adiciona 5% de padding interno esquerdo */
+    padding-right: 0%; /* Adiciona 5% de padding interno direito */
+    padding-top: 0; /* Remove padding top se houver na regra geral */
+    padding-bottom: 0; /* Remove padding bottom se houver na regra geral */
+}
+
+
+
+/* =============================== */
+/* Página: Editar Doce (editar.php) */
+/* Estilos específicos */
+/* =============================== */
+
+body.pagina-editar-doce .conteudo {
+    padding-left: 5%; /* Adiciona 5% de padding interno esquerdo */
+    padding-right: 5%; /* Adiciona 5% de padding interno direito */
+}
+
+body.pagina-editar-doce .conteudo h1 {
+   margin-left: 0; /* Remove margin-left da regra geral h1 */
+}
+
+body.pagina-editar-doce .conteudo .mensagem-sistema {
+   margin-left: 0; /* Remove margin-left da regra geral .mensagem-sistema */
+   margin-right: 0; /* Remove margin-right da regra geral .mensagem-sistema */
+   max-width: 100%; /* Garantir que não cause overflow */
+}
+
+
+body.pagina-editar-doce .conteudo form.aligned-left-form {
+   margin-left: 0; /* Remove margin-left fixo da regra 'form' geral */
+   margin-right: auto; /* Garante que o formulário se alinhe à esquerda */
+
+}
+

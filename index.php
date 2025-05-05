@@ -1,5 +1,6 @@
 <?php include 'cabecalho.php'; ?>
 <?php include 'conexao.php'; ?>
+<div class="conteudo">
 
 <?php
 $busca = $_GET['busca'] ?? '';
@@ -88,65 +89,52 @@ function gerar_link_ordem($coluna, $texto, $ordem_atual, $direcao_atual) {
 <head>
     <meta charset="UTF-8">
     <title>Consulta de Doces</title>
-    <link rel="stylesheet" href="estilo.css">
-    <style>
-        .linha-horizontal {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .linha-horizontal input {
-            flex: 1;
-        }
-        .status-ok { color: green; font-weight: bold; }
-        .status-alerta { color: orange; font-weight: bold; }
-        .status-critico { color: red; font-weight: bold; }
-    </style>
 </head>
 <body>
 
-<form method="GET" style="margin-bottom: 20px;">
-    <label>Buscar por nome:</label><br>
-    <input type="text" name="busca" value="<?php echo htmlspecialchars($busca); ?>">
+<form method="GET" class="index-filter-form"> <div class="form-row">
+        <label for="busca">Buscar por nome:</label>
+        <input type="text" name="busca" id="busca" value="<?php echo htmlspecialchars($busca); ?>">
+    </div>
 
-    <br><br>
-    <label>Categoria:</label><br>
-    <select name="categoria_id">
-        <option value="">Todas as categorias</option>
-        <?php
-        $categorias = $conn->query("SELECT * FROM categorias ORDER BY nome ASC");
-        while ($cat = $categorias->fetch_assoc()) {
-            $selecionado = ($categoria_id == $cat['id']) ? 'selected' : '';
-            echo "<option value='{$cat['id']}' $selecionado>{$cat['nome']}</option>";
-        }
-        ?>
-    </select>
+    <div class="form-row">
+        <label for="categoria_id">Categoria:</label>
+        <select name="categoria_id" id="categoria_id">
+            <option value="">Todas as categorias</option>
+            <?php
+            $categorias = $conn->query("SELECT * FROM categorias ORDER BY nome ASC");
+            while ($cat = $categorias->fetch_assoc()) {
+                $selecionado = ($categoria_id == $cat['id']) ? 'selected' : '';
+                echo "<option value='{$cat['id']}' $selecionado>{$cat['nome']}</option>";
+            }
+            ?>
+        </select>
+    </div>
 
-    <div class="linha-horizontal">
-        <input type="number" name="preco_min" step="0.01" placeholder="Preço mín." value="<?php echo $preco_min; ?>">
+    <div class="form-row linha-horizontal"> <input type="number" name="preco_min" step="0.01" placeholder="Preço mín." value="<?php echo $preco_min; ?>">
         <input type="number" name="preco_max" step="0.01" placeholder="Preço máx." value="<?php echo $preco_max; ?>">
     </div>
 
-    <div class="linha-horizontal">
-        <input type="number" name="estoque_min" placeholder="Estoque mín." value="<?php echo $estoque_min; ?>">
+    <div class="form-row linha-horizontal"> <input type="number" name="estoque_min" placeholder="Estoque mín." value="<?php echo $estoque_min; ?>">
         <input type="number" name="estoque_max" placeholder="Estoque máx." value="<?php echo $estoque_max; ?>">
     </div>
 
-    <br>
-    <label>Status do Estoque:</label><br>
-    <select name="filtro_status">
-        <option value="" <?php if ($filtro_status === '') echo 'selected'; ?>>Todos</option>
-        <option value="ok" <?php if ($filtro_status === 'ok') echo 'selected'; ?>>✅ Estoque Ok</option>
-        <option value="baixo" <?php if ($filtro_status === 'baixo') echo 'selected'; ?>>⚠️ Estoque Baixo</option>
-        <option value="zerado" <?php if ($filtro_status === 'zerado') echo 'selected'; ?>>❌ Esgotado</option>
-    </select>
+    <div class="form-row">
+        <label for="filtro_status">Status do Estoque:</label>
+        <select name="filtro_status" id="filtro_status">
+            <option value="" <?php if ($filtro_status === '') echo 'selected'; ?>>Todos</option>
+            <option value="ok" <?php if ($filtro_status === 'ok') echo 'selected'; ?>>✅ Estoque Ok</option>
+            <option value="baixo" <?php if ($filtro_status === 'baixo') echo 'selected'; ?>>⚠️ Estoque Baixo</option>
+            <option value="zerado" <?php if ($filtro_status === 'zerado') echo 'selected'; ?>>❌ Esgotado</option>
+        </select>
+    </div>
 
-    <br><br>
-    <input type="submit" value="Filtrar">
-    <a href="index.php" style="margin-left: 10px;">Limpar Filtros</a>
+    <div class="form-row form-buttons-row"> <input type="submit" value="Filtrar">
+        <a href="index.php" style="margin-left: 10px;">Limpar Filtros</a>
+    </div>
 </form>
 
-<a href="cadastrar.php">Cadastrar novo doce</a> | <a href="categorias.php">Gerenciar categorias</a><br><br>
+<a href="cadastrar.php">Cadastrar Produto</a> | <a href="categorias.php">Gerenciar categorias</a><br><br>
 
 <table>
     <tr>

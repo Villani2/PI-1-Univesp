@@ -30,40 +30,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Doce</title>
+    <title>Cadastrar Produto</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>Cadastrar Novo Doce</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <label>Nome:</label>
-        <input type="text" name="nome" required>
+    <h1>Cadastrar Novo Produto</h1>
+    <form method="POST" enctype="multipart/form-data"> <div class="form-row"> <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" required>
+        </div>
 
-        <label>Preço:</label>
-        <input type="number" name="preco" step="0.01" required>
+        <div class="form-row"> <label for="preco">Preço:</label>
+            <input type="number" name="preco" id="preco" step="0.01" required>
+        </div>
 
-        <label>Categoria:</label>
-        <select name="categoria_id" required>
-            <option value="">Selecione</option>
-            <?php
-            $cats = $conn->query("SELECT * FROM categorias ORDER BY nome ASC");
-            while ($c = $cats->fetch_assoc()) {
-                echo "<option value='{$c['id']}'>{$c['nome']}</option>";
-            }
-            ?>
-        </select>
+        <div class="form-row"> <label for="categoria_id">Categoria:</label>
+            <select name="categoria_id" id="categoria_id" required>
+                <option value="">Selecione</option>
+                <?php
+                $cats = $conn->query("SELECT * FROM categorias ORDER BY nome ASC");
+                while ($c = $cats->fetch_assoc()) {
+                    echo "<option value='{$c['id']}'>{$c['nome']}</option>";
+                }
+                ?>
+            </select>
+        </div>
 
-        <label>Descrição:</label>
-        <textarea name="descricao" required></textarea>
+        <div class="form-row"> <label for="descricao">Descrição:</label>
+            <textarea name="descricao" id="descricao" required></textarea>
+        </div>
 
-        <label>Imagem:</label>
-        <input type="file" name="imagem" accept="image/*">
+        <div class="form-row"> <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" id="imagem" accept="image/*">
+        </div>
 
-        <label>Estoque:</label>
-        <input type="number" name="estoque" min="0" required>
+        <div class="form-row"> <label for="estoque">Estoque:</label>
+            <input type="number" name="estoque" id="estoque" min="0" required>
+        </div>
 
-        <input type="submit" value="Cadastrar">
+        <div class="form-row form-buttons-row"> <input type="submit" value="Cadastrar">
+        </div>
     </form>
-    <br><a href="index.php">Voltar para a lista de doces</a>
+    <br><a href="index.php" class="btn-voltar">Voltar para a Home</a>
 </body>
 </html>
